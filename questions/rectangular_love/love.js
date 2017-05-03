@@ -36,21 +36,18 @@ function findYOverlap() {
   return {};
 };
 
-let r1 = {
-  leftX: 3,
-  bottomY: 4,
+function createRectangle(x,y,w,h) {
+  return {
+    leftX: x,
+    bottomY: y,
 
-  width: 2,
-  height: 3,
-};
+    width: w,
+    height: h,
+  };
+}
 
-let r2 = {
-  leftX: 1,
-  bottomY: 2,
-
-  width: 3,
-  height: 4,
-};
+let r1 = createRectangle(3,4,2,3);
+let r2 = createRectangle(1,2,3,4);
 
 let xCoords = findXOverlap(r1, r2);
 let yCoords = findYOverlap(r1, r2);
