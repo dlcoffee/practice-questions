@@ -6,25 +6,28 @@ let getRandomIntInclusive = (min, max) => {
 };
 
 let twoEgg = (floors, highestFloor) => {
-  let halfWay = Math.ceil(floors/2);
-
-  var eggHeight;
+  let incrementBy = 10;
+  var eggHeight = 10;
   var attempts = 1;
-
-  if (halfWay === highestFloor) {
-    return {
-      floor: halfWay,
-      attempts,
-    };
-  } else if (halfWay < highestFloor) {
-    eggHeight = halfWay;
-  } else {
-    eggHeight = 1;
-  }
 
   while (eggHeight < highestFloor) {
     attempts = attempts + 1;
-    eggHeight = eggHeight + 1;
+    eggHeight = eggHeight + incrementBy;
+  }
+
+  if (eggHeight > highestFloor) {
+    var eggHeightBrokenAt = eggHeight;
+    var starting = incrementBy * (attempts - 1) + 1;
+
+    attempts = attempts + 1;
+
+    for (eggHeight = starting; eggHeight < eggHeightBrokenAt; eggHeight++) {
+      if (eggHeight === highestFloor) {
+        break;
+      }
+
+      attempts = attempts + 1;
+    };
   }
 
   return {
@@ -36,7 +39,8 @@ let twoEgg = (floors, highestFloor) => {
 let min = 1;
 let max = 100;
 
-let highestFloor = getRandomIntInclusive(min, max);
+//let highestFloor = getRandomIntInclusive(min, max);
+let highestFloor = 19;
 console.log('the highest floor is:', highestFloor);
 
 let solution = twoEgg(max, highestFloor);
