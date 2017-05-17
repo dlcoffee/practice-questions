@@ -1,9 +1,20 @@
-function fib(n) {
+let fib = (n) => {
   if (n === 0 || n === 1) {
     return n;
   }
 
-  return fib(n-2) + fib(n-1);
+  let prevPrev = 0;
+  let prev = 1;
+  let current;
+
+  for (let i = 1; i < n; i++) {
+    current = prev + prevPrev;
+
+    prevPrev = prev;
+    prev = current;
+  }
+
+  return current;
 };
 
 console.log(fib(0));
