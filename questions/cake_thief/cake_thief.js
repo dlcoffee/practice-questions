@@ -38,8 +38,8 @@ const maxDuffelBagValue = (cakes, maxCapacity) => {
       }
 
       if (cakes[i].weight <= currentCapacity) {
-        let remainingCapacitiyAfterTakingCake = currentCapacity - cakes[i].weight;
-        let maxValueUsingCake = cakes[i].value + maxValuesAtCapacities[remainingCapacitiyAfterTakingCake];
+        let remainingCapacityAfterTakingCake = currentCapacity - cakes[i].weight;
+        let maxValueUsingCake = cakes[i].value + maxValuesAtCapacities[remainingCapacityAfterTakingCake];
 
         currentMaxValue = Math.max(maxValueUsingCake, currentMaxValue);
       }
