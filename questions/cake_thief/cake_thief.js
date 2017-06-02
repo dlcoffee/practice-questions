@@ -25,33 +25,32 @@ const compare = (a,b) => {
   return 0;
 }
 
-const maxDuffelBagValue = (cakes, capacity) => {
-  let toKeep = [];
-  let currentWeight = 0;
-  let currentCake;
+const maxDuffelBagValue = (cakes, maxCapacity) => {
+  let maxValuesAtCapacities = [];
 
-  let sorted = cakes.sort(compare);
+  for (var currentCapacity = 0; currentCapacity <= maxCapacity; currentCapacity++) {
+    let currentMaxValue = 0;
 
-  for (var i = 0; i < sorted.length; i++) {
-    currentCake = sorted[i];
+    for (var i = 0; i < cakes.length; i++) {
+      if (cakes[i].weight <= currentCapacity) {
+        let remainingCapacitiyAfterTakingCake = currentCapacity - cakes[i].weight;
+        let maxValueUsingCake = cakes[i].value + maxValuesAtCapacities[remainingCapacitiyAfterTakingCake];
 
-    while (currentWeight + currentCake.weight<= capacity) {
-      toKeep.push(currentCake);
-      currentWeight = currentWeight + currentCake.weight;
+        currentMaxValue = Math.max(maxValueUsingCake, currentMaxValue);
+      }
     }
+
+    maxValuesAtCapacities.push(currentMaxValue);
   }
 
-  return toKeep.reduce((acc, cake) => {
-    return acc + cake.value
-  }, 0);
+  return maxValuesAtCapacities[maxCapacity];
 };
 
 let cakes = [
-  new Cake(7, 160),
-  new Cake(3, 90),
-  new Cake(2, 15),
+  new Cake(3, 40),
+  new Cake(5, 70),
 ];
 
-let capacity = 20;
+let capacity = 9;
 
 console.log(maxDuffelBagValue(cakes, capacity));
