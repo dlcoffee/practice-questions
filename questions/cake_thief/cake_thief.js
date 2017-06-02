@@ -32,6 +32,11 @@ const maxDuffelBagValue = (cakes, maxCapacity) => {
     let currentMaxValue = 0;
 
     for (var i = 0; i < cakes.length; i++) {
+      if (cakes[i].weight === 0 && cakes[i].value !==0) {
+        console.log('youre rich!');
+        return Infinity;
+      }
+
       if (cakes[i].weight <= currentCapacity) {
         let remainingCapacitiyAfterTakingCake = currentCapacity - cakes[i].weight;
         let maxValueUsingCake = cakes[i].value + maxValuesAtCapacities[remainingCapacitiyAfterTakingCake];
