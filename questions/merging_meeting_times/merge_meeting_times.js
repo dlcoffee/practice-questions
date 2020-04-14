@@ -22,28 +22,16 @@ function mergeRanges(meetings) {
   const merged = [sortedMeetings[0]]
 
   for (let i = 1; i < sortedMeetings.length; i++) { // O(n)
-    const meeting = sortedMeetings[i]
+    const currentMeeting = sortedMeetings[i]
+    const lastMerged = merged[merged.length - 1]
 
-    let didAMerge = false
 
-    for (j = 0; j < merged.length; j++) { // O(n)
-      const alreadyMerged = merged[j]
-
-      if (isMergeable(alreadyMerged, meeting)) {
-        didAMerge = true
-
-        const mergedMeeting = {
-          startTime: Math.min(alreadyMerged.startTime, meeting.startTime),
-          endTime: Math.max(alreadyMerged.endTime, meeting.endTime),
-        }
-
-        merged[j] = mergedMeeting
-      }
+    if (currentMeeting.startTime < lastMerged.endTime) {
+      lastMerged.endTime = Math.max(lastMerged.endTime, currentMeeting.endTime)
+    } else {
+      merged.push(currentMeeting)
     }
 
-    if (!didAMerge) {
-      merged.push(meeting)
-    }
   }
 
   return merged
